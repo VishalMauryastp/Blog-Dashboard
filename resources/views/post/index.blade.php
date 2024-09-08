@@ -3,7 +3,7 @@
 
     <div class="w-[95%] mx-auto py-10">
         <div class="">
-            <dd>{{$postData}} </dd>
+            <!-- <dd>{{$postData}} </dd> -->
             <!-- <style>
                 td{
                     border: 1px solid red   !important;
@@ -63,11 +63,12 @@
                                     @csrf
                                     @method('PATCH')
 
-                                    <div>
-                                        <label for="isEnable">Enable Post:</label>
-                                        <input type="checkbox" onchange=" document.getElementById('isEnableForm').submit();" id="isEnable" name="isEnable" value="1" {{ $post->isEnable ? 'checked' : '' }} >
-                                    </div>
-
+                                    <label class="relative cursor-pointer block  w-fit">
+                                        <input type="checkbox" class="sr-only peer" onchange=" document.getElementById('isEnableForm').submit();" id="isEnable" name="isEnable" value="1" {{ $post->isEnable ? 'checked' : '' }} />
+                                        <div
+                                            class="w-11 h-6 flex items-center bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:absolute after:left-[2px] peer-checked:after:border-white after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#007bff]">
+                                        </div>
+                                    </label>
                                     <button class="hidden" type="submit">Update Status</button>
                                 </form>
 
@@ -84,15 +85,6 @@
                                             data-original="#000000" />
                                     </svg>
                                 </a>
-                                <!-- <a href="http://127.0.0.1:8000/blogs/{{$post->id}}/edit" class=" inline-block " title="Delete">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
-                                        <path
-                                            d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                                            data-original="#000000" />
-                                        <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                                            data-original="#000000" />
-                                    </svg>
-                                </a> -->
                                 <form class="inline-block" action="{{ route('blogs.destroy', $post->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
