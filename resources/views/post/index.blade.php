@@ -10,9 +10,25 @@
                 }
             </style> -->
             <div class="font-sans overflow-x-auto">
-                <h3 class="font-[700] text-3xl">
-                    Blogs
-                </h3>
+                <div class="flex justify-between ">
+
+                    <h3 class="font-[700] text-3xl">
+                        Blogs
+                    </h3>
+
+                    <a href="/blogs/create">
+                        <button class="flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-400 transition-all text-white rounded">
+                            <svg class="inline-block mr-1" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
+                            </svg> Add New
+                        </button>
+                    </a>
+                </div>
+                @if (session('success'))
+                <div id="success-message" class="bg-green-100 text-green-800 p-4 rounded mb-4 mt-4">
+                    {{ session('success') }}
+                </div>
+                @endif
                 <table class="min-w-full bg-white mt-10" border="1">
                     <thead class="bg-gray-100 whitespace-nowrap">
                         <tr>
@@ -59,12 +75,12 @@
                                     </label>
                                 </div> -->
 
-                                <form id="isEnableForm" action="{{ route('blogs.updateEnable', $post->id) }}" method="POST">
+                                <form id="isEnableForm-{{$post->id}}" action="http://127.0.0.1:8000/blogs/{{$post->id}}/enable" method="POST">
                                     @csrf
                                     @method('PATCH')
 
                                     <label class="relative cursor-pointer block  w-fit">
-                                        <input type="checkbox" class="sr-only peer" onchange=" document.getElementById('isEnableForm').submit();" id="isEnable" name="isEnable" value="1" {{ $post->isEnable ? 'checked' : '' }} />
+                                        <input type="checkbox" class="sr-only peer" onchange=" document.getElementById('isEnableForm-{{$post->id}}').submit();" id="isEnable" name="isEnable" value="0" {{ $post->isEnable ? 'checked' : '' }} />
                                         <div
                                             class="w-11 h-6 flex items-center bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:absolute after:left-[2px] peer-checked:after:border-white after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#007bff]">
                                         </div>

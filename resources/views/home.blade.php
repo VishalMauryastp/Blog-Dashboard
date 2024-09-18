@@ -639,7 +639,7 @@
                         </ul>
                     </div>
                 </div>
-                <form class="ml-auo space-y-4">
+                <!-- <form class="ml-auo space-y-4">
                     <input type='text' placeholder='Name' class="w-full rounded-md py-3 px-4 bg-[#f8f9ff] outline-cyan-900" />
                     <input type='email' placeholder='Email' class="w-full rounded-md py-3 px-4 bg-[#f8f9ff] outline-cyan-900" />
                     <input type='text' placeholder='Subject'
@@ -648,7 +648,78 @@
                         class="w-full rounded-md px-4 bg-[#f8f9ff] pt-3 outline-cyan-900"></textarea>
                     <button type='button'
                         class="w-full mt-6 px-6 py-3 rounded-xl text-white bg-cyan-900 transition-all hover:bg-cyan-800">Send</button>
+                </form> -->
+                <form class="ml-auto space-y-4" action="/messages" method="POST">
+                    @csrf
+
+                    <!-- Name Field -->
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        class="w-full rounded-md py-3 px-4 bg-[#f8f9ff] outline-cyan-900"
+                        value="{{ old('name') }}"
+                        required />
+                    @error('name')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+
+                    <!-- Email Field -->
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        class="w-full rounded-md py-3 px-4 bg-[#f8f9ff] outline-cyan-900"
+                        value="{{ old('email') }}"
+                        required />
+                    @error('email')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                    <!-- Phone Field -->
+                    <input
+                        type="tel"
+                        name="phone"
+                        placeholder="phone"
+                        class="w-full rounded-md py-3 px-4 bg-[#f8f9ff] outline-cyan-900"
+                        value="{{ old('phone') }}"
+                        required />
+                    @error('phone')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+
+                    <!-- Subject Field -->
+                    <input
+                        type="text"
+                        name="subject"
+                        placeholder="Subject"
+                        class="w-full rounded-md py-3 px-4 bg-[#f8f9ff] outline-cyan-900"
+                        value="{{ old('subject') }}"
+                        required />
+                    @error('subject')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+
+                    <!-- Message Field -->
+                    <textarea
+                        name="message"
+                        placeholder="Message"
+                        rows="6"
+                        class="w-full rounded-md px-4 bg-[#f8f9ff] pt-3 outline-cyan-900"
+                        required>{{ old('message') }}</textarea>
+                    @error('message')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+
+                   
+
+                    <!-- Submit Button -->
+                    <button
+                        type="submit"
+                        class="w-full mt-6 px-6 py-3 rounded-xl text-white bg-cyan-900 transition-all hover:bg-cyan-800">
+                        Send
+                    </button>
                 </form>
+
             </div>
         </div>
 

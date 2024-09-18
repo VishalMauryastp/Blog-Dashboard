@@ -150,7 +150,7 @@
         </div>
     </div>
 
-
+   
     @include('layouts.scripts')
 </body>
 

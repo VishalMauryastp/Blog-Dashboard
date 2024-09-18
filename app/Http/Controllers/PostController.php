@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class PostController extends Controller
 {
@@ -32,19 +34,32 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:posts,slug', // Ensure slug is unique if provided
             'content' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image_alt' => 'nullable|string|max:255',
+            'isEnable' => 'nullable|boolean',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_keyword' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
         ]);
 
         $post = new Post();
         $post->title = $request->input('title');
+        $post->slug = $request->input('slug') ?? Str::slug($request->input('title'));
         $post->content = $request->input('content');
         $post->isEnable = $request->input('isEnable', true);
+
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
             $post->image = $imagePath;
         }
+
+        $post->image_alt = $request->input('image_alt');
+        $post->meta_title = $request->input('meta_title');
+        $post->meta_keyword = $request->input('meta_keyword');
+        $post->meta_description = $request->input('meta_description');
 
         $post->save();
 
@@ -75,12 +90,22 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255,slug',
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'image_alt' => 'nullable|string|max:255',
+            'isEnable' => 'nullable|boolean',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_keyword' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
+            'title' => 'required|string|max:255',
             'content' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $post = Post::findOrFail($id);
         $post->title = $request->input('title');
+        $post->slug = $request->input('slug') ?? Str::slug($request->input('title'));
         $post->content = $request->input('content');
         $post->isEnable = $request->input('isEnable', true);
 
@@ -92,6 +117,10 @@ class PostController extends Controller
             $imagePath = $request->file('image')->store('images', 'public');
             $post->image = $imagePath;
         }
+        $post->image_alt = $request->input('image_alt');
+        $post->meta_title = $request->input('meta_title');
+        $post->meta_keyword = $request->input('meta_keyword');
+        $post->meta_description = $request->input('meta_description');
 
         $post->save();
 
@@ -127,6 +156,7 @@ class PostController extends Controller
         // $post->save();
         // return response()->json(['success' => true]);
         $post = Post::findOrFail($id);
+     
 
         // Update the 'isEnable' status based on whether 'isEnable' is present in the request
         $post->isEnable = $request->has('isEnable') ? 1 : 0;
