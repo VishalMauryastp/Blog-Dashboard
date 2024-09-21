@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Message;
+use App\Models\Query;
+use App\Notifications\NewMessageReceived;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -19,13 +22,25 @@ class MessageController extends Controller
         ]);
 
         // Create a new message entry in the database
-        Message::create([
+        $message =    Message::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
             'subject' => $request->input('subject'),
             'message' => $request->input('message'),
         ]);
+
+        // Query::create([
+        //     'title' => $message->subject,
+        //     'description' => $message->message,
+        // ]);
+
+        // Notify all users (optional)
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->notify(new NewMessageReceived($message));
+        }
+
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Your message has been sent successfully.');

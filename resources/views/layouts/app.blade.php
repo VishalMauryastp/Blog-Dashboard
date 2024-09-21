@@ -85,7 +85,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" class="text-white text-sm flex items-center hover:bg-gray-700 rounded px-4 py-3 transition-all">
+                        <a href="/inbox" class="text-white text-sm flex items-center hover:bg-gray-700 rounded px-4 py-3 transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke='currentColor' class="w-[18px] h-[18px] mr-4"
                                 viewBox="0 0 682.667 682.667">
                                 <defs>

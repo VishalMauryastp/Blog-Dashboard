@@ -2,12 +2,16 @@
 
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\MessageController;
+
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TeamController;
+use App\Models\Team;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home');
+    $team = Team::all(); 
+    return view('home', compact('team'));
 });
 
 Route::get('/blog', function () {
@@ -26,9 +30,11 @@ Route::get('contact', function () {
 // Route::post('messages', [MessageController::class, 'store'])->name('messages.store');
 
 Route::middleware('auth')->group(function () {
+
     // Route::get('/inbox', [MessageController::class, 'index'])->name('messages.index');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::resource('blogs', PostController::class);
+    Route::resource('team', TeamController::class);
     Route::resource('/inbox', MessageController::class);
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

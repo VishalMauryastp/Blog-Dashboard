@@ -4,6 +4,7 @@
         <h1 class="text-4xl font-bold text-red-600 mb-4">
             Create Post
         </h1>
+        
         @if (session('success'))
         <div class="bg-green-100 text-green-800 p-4 rounded mb-4">
             {{ session('success') }}
