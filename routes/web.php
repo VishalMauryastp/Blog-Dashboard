@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\MessageController;
 
@@ -14,9 +15,7 @@ Route::get('/', function () {
     return view('home', compact('team'));
 });
 
-Route::get('/blog', function () {
-    return view('blog');
-});
+Route::resource('blog', BlogController::class);
 
 
 Route::get('/dashboard', [dashboardController::class, "index"])->middleware(['auth', 'verified'])->name('dashboard');
@@ -27,7 +26,7 @@ Route::get('contact', function () {
     return view('contact');
 })->name('contact.form');
 
-// Route::post('messages', [MessageController::class, 'store'])->name('messages.store');
+Route::post('messages', [MessageController::class, 'store'])->name('messages.store');
 
 Route::middleware('auth')->group(function () {
 

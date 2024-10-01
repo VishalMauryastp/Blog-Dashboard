@@ -165,4 +165,8 @@ class PostController extends Controller
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Post status updated successfully.');
     }
+
+    
+
+
 }

@@ -516,7 +516,7 @@
                     <button type='button'
                         class="w-full mt-6 px-6 py-3 rounded-xl text-white bg-cyan-900 transition-all hover:bg-cyan-800">Send</button>
                 </form> -->
-                <form class="ml-auto space-y-4" action="/inbox" method="POST">
+                <form class="ml-auto space-y-4" action="/messages" method="POST">
                     @csrf
 
                     <!-- Name Field -->
