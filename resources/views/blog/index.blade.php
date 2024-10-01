@@ -1,7 +1,7 @@
 <x-page>
-    <dd>
+    <!-- <dd>
         {{$posts}}
-    </dd>
+    </dd> -->
     <div class="w-[95%] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
         @if ($posts->isEmpty())
             <p class="text-gray-500 text-center">No posts available.</p>
